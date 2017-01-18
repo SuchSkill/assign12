@@ -1,0 +1,42 @@
+create table Customer (
+           CUSTOMER_ID INT NOT NULL AUTO_INCREMENT,
+           name varchar(20),
+           discountRate INT,
+           PRIMARY KEY (CUSTOMER_ID)
+    );
+	
+	
+		create table Ordert (
+           order_id INT NOT NULL AUTO_INCREMENT,
+           ORDER_CUSTOMER_FK int,
+		   order_date date,
+           PRIMARY KEY (order_id),
+           FOREIGN KEY(ORDER_CUSTOMER_FK) REFERENCES customer(CUSTOMER_ID)
+    );
+	
+		create table Product (
+           PRODUCT_ID INT NOT NULL AUTO_INCREMENT,
+           PRODUCT_NAME varchar(20),
+           PRIMARY KEY (PRODUCT_ID)
+    );
+	
+	
+		create table OrderItem (
+           ORDER_ITEM_ID INT NOT NULL AUTO_INCREMENT,
+           ORDER_ITEM_ORDER_FK INT,
+           ORDER_ITEM_PRODUCT_FK INT,
+		   ORDER_ITEM_COUNT int,
+           PRIMARY KEY (ORDER_ITEM_ID),
+          FOREIGN KEY(ORDER_ITEM_ORDER_FK) REFERENCES customer(ORDER_ID),
+          FOREIGN KEY(ORDER_ITEM_PRODUCT_FK) REFERENCES customer(PRODUCT_ID)
+    );
+	
+		create table OrderItem (
+           ORDER_ITEM_ID INT NOT NULL AUTO_INCREMENT,
+           ORDER_ITEM_ORDER_FK INT,
+           ORDER_ITEM_PRODUCT_FK INT,
+		   ORDER_ITEM_COUNT int,
+           PRIMARY KEY (ORDER_ITEM_ID),
+          FOREIGN KEY(ORDER_ITEM_ORDER_FK) REFERENCES ordert(ORDER_ID),
+          FOREIGN KEY(ORDER_ITEM_PRODUCT_FK) REFERENCES product(PRODUCT_ID)
+    );
