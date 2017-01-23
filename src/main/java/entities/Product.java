@@ -1,18 +1,21 @@
 package entities;
 
+import persistance.EntityBase;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *
  */
 @Entity
 @Table(name = "PRODUCT")
-public class Product {
+public class Product extends EntityBase implements Serializable {
 	
 	@Id
 	@GeneratedValue(//
 			strategy = GenerationType.AUTO)
-	@Column(name = "PRODUCT_ID", unique = true, nullable = false)
+	@Column(name = "PRODUCT_ID")
 	private int id;
 	
 	@Column(name = "PRODUCT_NAME", nullable = false)

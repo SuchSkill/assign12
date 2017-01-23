@@ -20,7 +20,7 @@ public abstract class RepositoryBase<TEntity> implements IRepository<TEntity> {
 	}
 	
 	
-	public final void persist(TEntity entity) {
+	public void persist(TEntity entity) {
 		this.entityManager().persist(entity);
 	}
 	

@@ -13,8 +13,7 @@ import javax.persistence.criteria.CriteriaBuilder;
  */
 public final class Context implements IContext {
 	
-	private static final String PERSISTENCE_UNIT_NAME = "jpa"; // see
-	// persistence.xml
+	private static final String PERSISTENCE_UNIT_NAME = "jpa"; // see persistence.xml
 	private static final EntityManagerFactory entityManagerFactory;
 	
 	static {

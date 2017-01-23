@@ -13,11 +13,11 @@ import java.util.List;
 
 public class CustomerRepositoryTest extends RepositoryTestBase {
 	@Test
-	public void persist() {
+	public void persistTest() {
 		ICustomerRepository sut = this.context().customer();
 		long countBefore = sut.count();
 		Customer customer = new Customer();
-		customer.setName("Warsaw");
+		customer.setName("Bob");
 		customer.setDiscountRate(0);
 		sut.persist(customer);
 		flush();
@@ -32,18 +32,18 @@ public class CustomerRepositoryTest extends RepositoryTestBase {
 		ICustomerRepository sut = this.context().customer();
 		long countBefore = sut.count();
 		CustomerQuery emptyQuery = new CustomerQuery();
-		List<Customer> citiesBeforeEmptyQuery = sut.getByQuery(emptyQuery);
-		Assert.assertEquals(countBefore, citiesBeforeEmptyQuery.size());
+		List<Customer> customersBeforeEmptyQuery = sut.getByQuery(emptyQuery);
+		Assert.assertEquals(countBefore, customersBeforeEmptyQuery.size());
 		Customer customer = new Customer();
-		customer.setName("Warsaw");
+		customer.setName("Bob");
 		customer.setDiscountRate(0);
 		sut.persist(customer);
 		flush();
 		CustomerQuery selectiveQuery = new CustomerQuery();
-		selectiveQuery.name = "Warsaw";
-		List<Customer> citiesAfterSelectiveQuery = sut.getByQuery(emptyQuery);
-		Assert.assertEquals(1, citiesAfterSelectiveQuery.size());
-		Assert.assertEquals(customer.getName(), citiesAfterSelectiveQuery.get(0).getName());
+		selectiveQuery.name = "Bob";
+		List<Customer> customersAfterSelectiveQuery = sut.getByQuery(emptyQuery);
+		Assert.assertEquals(1, customersAfterSelectiveQuery.size());
+		Assert.assertEquals(customer.getName(), customersAfterSelectiveQuery.get(0).getName());
 	}
 	
 }

@@ -12,5 +12,4 @@ import java.util.List;
  */
 public interface IOrderRepository extends IRepository<Order>  {
 	List<Order> getByQuery(OrderQuery query);
-	int getProductAmountSince(OrderQuery query);
 }

@@ -4,19 +4,22 @@ import entities.Product;
 import org.junit.Assert;
 import org.junit.Test;
 import persistance.Context;
+import querys.CustomerQuery;
+import querys.OrderItemQuery;
 import repositories.ICustomerRepository;
 import repositories.IOrderItemRepository;
 import repositories.IOrderRepository;
 import repositories.IProductRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Created by Eugene on 18.01.2017.
  */
 public class DinamicalVIPTest extends RepositoryTestBase {
 	@Test
-	public void getCount() {
+	public void DinamicalVIPTest() {
 		Context context = this.context();
 		ICustomerRepository customerRepository = context.customer();
 		Customer customer = new Customer();
@@ -39,10 +42,26 @@ public class DinamicalVIPTest extends RepositoryTestBase {
 		IOrderItemRepository orderItemRepository = context.orderItem();
 		OrderItem orderItem = new OrderItem();
 		orderItem.setOrder(order);
-		orderItem.setCount(1000);
+		orderItem.setCount(5001);
 		orderItem.setProduct(product);
 		orderItemRepository.persist(orderItem);
 		flush();
+		
+		Order order2 = new Order();
+		order2.setCustomer(customer);
+		order2.setDate(LocalDate.now());
+		orderRepository.persist(order2);
+		flush();
+		
+		OrderItem orderItem2 = new OrderItem();
+		orderItem2.setOrder(order2);
+		orderItem2.setCount(5001);
+		orderItem2.setProduct(product);
+		orderItemRepository.persist(orderItem2);
+		flush();
+		List<Customer> CustomersVIP = customerRepository.getVIPCustomers();
+		Assert.assertEquals(10, CustomersVIP.get(0).getDiscountRate());
+		
 		
 	}
 	

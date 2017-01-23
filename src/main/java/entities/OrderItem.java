@@ -1,31 +1,39 @@
 package entities;
 
+import persistance.EntityBase;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  *
  */
 @Entity
 @Table(name = "OrderItem")
-public class OrderItem {
+public class OrderItem extends EntityBase implements Serializable {
 	@Id
 	@GeneratedValue(//
 			strategy = GenerationType.AUTO)
-	@Column(name = "ORDER_ITEM_ID", nullable = false)
+	@Column(name = "ORDER_ITEM_ID")
 	private int id;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = Order.class)
 	@JoinColumn( //
-			name = "ORDER_ID", //
-			nullable = false, //
-			foreignKey = @ForeignKey(name = "ORDER_ITEM_ORDER_FK"))
+			name = "ORDER_ITEM_ORDER_FK", //
+			nullable = false //
+//			foreignKey = @ForeignKey(name = "ORDER_ID"),
+//			referencedColumnName = "ORDER_ID"
+	)
 	private Order order;
 	
-	@ManyToOne
+	@ManyToOne(targetEntity = Product.class)
 	@JoinColumn( //
-			name = "PRODUCT_ID", //
-			nullable = false, //
-			foreignKey = @ForeignKey(name = "ORDER_ITEM_PRODUCT_FK"))
+			name = "ORDER_ITEM_PRODUCT_FK", //
+			nullable = false //
+//			foreignKey = @ForeignKey(name = "PRODUCT_ID"),
+//			referencedColumnName = "PRODUCT_ID"
+	
+	)
 	private Product product;
 	
 	@Column(name = "ORDER_ITEM_COUNT")

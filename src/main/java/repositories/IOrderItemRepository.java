@@ -3,6 +3,7 @@ package repositories;
 import entities.Customer;
 import entities.OrderItem;
 import querys.OrderItemQuery;
+import querys.OrderQuery;
 
 import java.util.List;
 

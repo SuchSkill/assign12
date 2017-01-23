@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class OrderItemRepository  extends RepositoryBase<OrderItem> implements
 		super(context, OrderItem.class);
 	}
 	
-
+	
 	
 	@Override
 	public List<OrderItem> getByQuery(OrderItemQuery query) {
@@ -42,6 +43,7 @@ public class OrderItemRepository  extends RepositoryBase<OrderItem> implements
 		Query criteriaQuery = this.entityManager().createQuery(criteria);
 		return (List<OrderItem>) criteriaQuery.getResultList();
 	}
+	
 	
 	
 }

@@ -5,15 +5,16 @@ import javax.persistence.*;
  * Created by Eugene on 17.01.2017.
  */
 import persistance.EntityBase;
+
+import java.io.Serializable;
+
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer extends EntityBase{
-	
-	
+public class Customer extends EntityBase implements Serializable {
 	@Id
 	@GeneratedValue(//
 			strategy = GenerationType.AUTO)
-	@Column(name = "CUSTOMER_ID", unique = true, nullable = false)
+	@Column(name = "CUSTOMER_ID")
 	private int id;
 	
 	@Column(name = "name")
@@ -44,5 +45,14 @@ public class Customer extends EntityBase{
 	
 	public void setDiscountRate(int discountRate) {
 		this.discountRate = discountRate;
+	}
+	
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", discountRate=" + discountRate +
+				'}';
 	}
 }

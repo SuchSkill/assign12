@@ -1,8 +1,10 @@
 package entities;
 
 import org.hibernate.annotations.Type;
+import persistance.EntityBase;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -11,12 +13,12 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "ORDERt")
-public class Order {
+public class Order extends EntityBase implements Serializable {
 	
 	@Id
 	@GeneratedValue(//
 			strategy = GenerationType.AUTO)
-	@Column(name = "ORDER_ID", nullable = false)
+	@Column(name = "ORDER_ID")
 	private int id;
 	
 	
@@ -36,11 +38,22 @@ public class Order {
 		this.customer = customer;
 	}
 	
-	@ManyToOne
+	@Override
+	public String toString() {
+		return "Order{" +
+				"id=" + id +
+				", customer=" + customer +
+				", date=" + date +
+				'}';
+	}
+	
+	@ManyToOne(targetEntity = Customer.class)
 	@JoinColumn( //
-			name = "CUSTOMER_ID", //
-			nullable = false, //
-			foreignKey = @ForeignKey(name = "ORDER_CUSTOMER_FK"))
+			name = "ORDER_CUSTOMER_FK", //
+			nullable = false //
+//			foreignKey = @ForeignKey(name = "CUSTOMER_ID")
+//			referencedColumnName = "CUSTOMER_ID"
+	)
 	private Customer customer;
 	
 	@Column(name="ORDER_DATE")
